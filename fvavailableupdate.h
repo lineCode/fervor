@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QNetworkReply>
 
 class FvAvailableUpdate : public QObject
 {
@@ -36,6 +37,14 @@ public:
 	QString GetEnclosureType();
 	void SetEnclosureType(QString enclosureType);
 
+    inline QString UpdateHistoryHtmlFile()const;
+
+protected slots:
+void slot_downloadSignal(int evt, QUrl, int progress, QNetworkReply::NetworkError);
+
+signals:
+void signal_ReleaseNoteUpdated();
+
 private:
 	QString m_title;
 	QUrl m_releaseNotesLink;
@@ -45,7 +54,6 @@ private:
 	QString m_enclosurePlatform;
 	unsigned long m_enclosureLength;
 	QString m_enclosureType;
-
 };
 
 #endif // FVAVAILABLEUPDATE_H

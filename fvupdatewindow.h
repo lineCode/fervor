@@ -1,7 +1,9 @@
-#ifndef FVUPDATEWINDOW_H
+﻿#ifndef FVUPDATEWINDOW_H
 #define FVUPDATEWINDOW_H
 
 #include <QWidget>
+#include <QNetworkReply>
+
 class QGraphicsScene;
 
 namespace Ui {
@@ -21,10 +23,24 @@ public:
 
 	void closeEvent(QCloseEvent* event);
 
+protected:
+    void UpdateReleaseNote();
+
+protected slots:
+    void signal_downloadSignal(int evt, QUrl, int progress, QNetworkReply::NetworkError);
+
+private slots:
+void on_installUpdateButton_clicked();
+void slot_ReleaseNoteUpdated();
+
 private:
 	Ui::FvUpdateWindow*	m_ui;
-	QGraphicsScene* m_appIconScene;
 
+    // 网络更新地址
+    QString     file_url_;
+    
+    // 保存到的本地地址
+    QString     saved_file_url_;
 };
 
 #endif // FVUPDATEWINDOW_H

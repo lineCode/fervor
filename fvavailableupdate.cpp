@@ -1,4 +1,7 @@
 #include "fvavailableupdate.h"
+#include <QDir>
+#include "..\src\frame\knet\ksyncrequest.h"
+#include "..\include\misc.h"
 
 FvAvailableUpdate::FvAvailableUpdate(QObject *parent) :
 	QObject(parent)
@@ -24,6 +27,12 @@ QUrl FvAvailableUpdate::GetReleaseNotesLink()
 void FvAvailableUpdate::SetReleaseNotesLink(QUrl releaseNotesLink)
 {
 	m_releaseNotesLink = releaseNotesLink;
+
+    if (!m_releaseNotesLink.isEmpty())
+    {
+        KHttpDownload(m_releaseNotesLink, UpdateHistoryHtmlFile(), this,
+            SLOT(slot_downloadSignal(int, QUrl, int, QNetworkReply::NetworkError)));
+    }
 }
 
 void FvAvailableUpdate::SetReleaseNotesLink(QString releaseNotesLink)
@@ -94,4 +103,18 @@ QString FvAvailableUpdate::GetEnclosureType()
 void FvAvailableUpdate::SetEnclosureType(QString enclosureType)
 {
 	m_enclosureType = enclosureType;
+}
+
+void FvAvailableUpdate::slot_downloadSignal(int evt, QUrl,
+    int progress, QNetworkReply::NetworkError)
+{
+    if (evt == HttpDownload_Event_Finished)
+    {
+        emit signal_ReleaseNoteUpdated();
+    }
+}
+
+inline QString FvAvailableUpdate::UpdateHistoryHtmlFile() const
+{
+    return QDir::currentPath() + "/update_history.html";
 }

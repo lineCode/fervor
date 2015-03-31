@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>160</height>
+    <width>610</width>
+    <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="updateFileIsLocatedLabel">
      <property name="text">
-      <string>The update file is located at:</string>
+      <string>正在下载</string>
      </property>
     </widget>
    </item>

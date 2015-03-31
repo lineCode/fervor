@@ -8,3 +8,6 @@ fvupdateconfig.h
 *.pro.user
 *.ui.autosave
 Sample-build-*
+GeneratedFiles
+Deleted
+

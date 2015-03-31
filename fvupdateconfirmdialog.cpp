@@ -3,6 +3,7 @@
 #include "fvupdater.h"
 #include "ui_fvupdateconfirmdialog.h"
 #include <QCloseEvent>
+#include "define.h"
 
 
 FvUpdateConfirmDialog::FvUpdateConfirmDialog(QWidget *parent) :

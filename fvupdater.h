@@ -26,6 +26,8 @@ public:
 	void SetFeedURL(QString feedURL);
 	QString GetFeedURL();
 	
+    FvAvailableUpdate* GetProposedUpdate();
+
 public slots:
 
 	// Check for updates
@@ -47,7 +49,6 @@ protected:
 
 	friend class FvUpdateWindow;		// Uses GetProposedUpdate() and others
 	friend class FvUpdateConfirmDialog;	// Uses GetProposedUpdate() and others
-	FvAvailableUpdate* GetProposedUpdate();
 
 
 protected slots:
@@ -120,7 +121,6 @@ private slots:
 	void httpFeedUpdateDataReadProgress(qint64 bytesRead,
 										qint64 totalBytes);
 	void httpFeedDownloadFinished();
-
 
 private:
 
